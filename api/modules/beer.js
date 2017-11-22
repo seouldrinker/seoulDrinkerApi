@@ -18,7 +18,10 @@ async function _appendBeerExecuter (models, popArray) {
 
 export async function getBeerList (req) {
   const findBeers = Beer.find({is_ok: 1}).sort({kor_name: 1})
-  const beers = await _appendBeerExecuter(findBeers, [])
+  const beers = await _appendBeerExecuter(findBeers, [{
+    path: 'brewery',
+    model: 'Brewery'
+  }])
 
   // 어딘가 펍 최상단으로 이동.
   const somewhereBeerIndex = beers.findIndex(beer => {
